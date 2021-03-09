@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +16,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.midterm.emp.services.EmployeeService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +35,9 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor
 public class Employee {
+    @Transient
+    @Autowired
+    EmployeeService empService;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,4 +59,21 @@ public class Employee {
 
 	@OneToOne(mappedBy = "emp", cascade = CascadeType.ALL, orphanRemoval = true)
 	private User user;
+
+    @Transient
+	private MonetaryAmount baseSalary_;
+
+    @Transient
+	private MonetaryAmount netSalary;
+
+    @PostLoad
+	protected void onPostLoad() {
+		this.baseSalary_ =
+				Monetary.getDefaultAmountFactory()
+					.setNumber(baseSalary)
+					.setCurrency("USD")
+					.create();
+
+        this.netSalary = empService.calculateNetSalary(level, baseSalary_);
+	}
 }
