@@ -4,7 +4,7 @@
 
 ## Features
 
-1. Employee List for admin only.
+1. Employee List for admin only. List contains net salary calculated with the given formula.
 2. Edit/Delete employees by admin.
 3. Create user and employee by admin.
 4. View own user profile.
@@ -16,7 +16,7 @@
 ## Models
 
 1. `User`
-2. `Employee` - uses builder pattern (see create api).
+2. `Employee` - uses builder pattern (see create api). Has several transient values for `Monetary` base and net salaries.
 3. `Role`
 4. `Address`
 5. `Level` (Enum) - has method to return bonus salary (in `MonetaryAmount`)
