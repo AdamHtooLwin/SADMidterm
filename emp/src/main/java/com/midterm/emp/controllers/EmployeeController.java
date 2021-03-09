@@ -42,6 +42,7 @@ public class EmployeeController {
         mv.addObject("user", user);
 
         List<User> users = userDao.findAll();
+        mv.addObject("users", users);
 
         // for (Role role: u.getRoles()) {
         //     if (role.getName().equalsIgnoreCase("ROLE_ADMIN")) {
@@ -57,6 +58,13 @@ public class EmployeeController {
     public String delete(@PathVariable("id") int id) {
         Employee employee = employeeDao.getOne(id);
         employeeDao.delete(employee);
+
+        // for (Role role: u.getRoles()) {
+        //     if (role.getName().equalsIgnoreCase("ROLE_ADMIN")) {
+        //         System.out.println("Current user is " + role.getName());
+        //         mv.addObject("admin_flag", true);
+        //     }
+        // }
 
         return "/admin";
     }
