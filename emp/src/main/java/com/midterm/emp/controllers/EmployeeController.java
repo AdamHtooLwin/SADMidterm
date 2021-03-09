@@ -1,18 +1,23 @@
 package com.midterm.emp.controllers;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.midterm.emp.dao.EmployeeJPADao;
 import com.midterm.emp.dao.UserJPADao;
 import com.midterm.emp.models.Employee;
 import com.midterm.emp.models.User;
+import com.midterm.emp.services.AdminService;
 import com.midterm.emp.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,6 +30,9 @@ public class EmployeeController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping(path = "/")
     public ModelAndView home(Principal principal) {
@@ -59,13 +67,58 @@ public class EmployeeController {
         Employee employee = employeeDao.getOne(id);
         employeeDao.delete(employee);
 
-        // for (Role role: u.getRoles()) {
-        //     if (role.getName().equalsIgnoreCase("ROLE_ADMIN")) {
-        //         System.out.println("Current user is " + role.getName());
-        //         mv.addObject("admin_flag", true);
-        //     }
-        // }
-
         return "/admin";
+    }
+
+    @GetMapping(path = "/users/create")
+    public String createUser() {
+        return "/createUser.jsp";
+    }
+
+    @GetMapping(path = "employee/{id}/edit")
+    public ModelAndView editEmployee(@PathVariable("id") int id) {
+        ModelAndView mv = new ModelAndView("/editEmployee.jsp");
+        Employee employee = employeeDao.getOne(id);
+        mv.addObject("employee", employee);
+
+        return mv;
+    }
+
+    @GetMapping(path = "employee/{id}")
+    public ModelAndView viewProfile(@PathVariable("id") int id, Principal principal) {
+        ModelAndView mv = new ModelAndView("/viewProfile.jsp");
+        User user = userService.findByUsername(principal.getName());
+        mv.addObject("user", user);
+
+        return mv;
+    }
+
+    @PostMapping(path = "employee/{id}/edit")
+    public String updateEmployee(@PathVariable("id") int id,
+                                        @RequestParam(name = "name") String name, 
+                                        @RequestParam(name = "level") String level,
+                                        @RequestParam(name = "baseSalary") String baseSalary                          
+    ) {
+        
+        Employee employee = employeeDao.getOne(id);
+        
+        adminService.adminUpdate(employee, name, level, baseSalary);
+
+        return "redirect:/admin";
+    }
+
+    @PostMapping(path = "employee/{id}/editBirthday")
+    public String updateEmployeeBirthday(@PathVariable("id") int id,
+                                        @RequestParam(name = "birthday") String birthday                        
+    ) {
+        
+        Employee employee = employeeDao.getOne(id);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(birthday, formatter);
+        
+        employee.setBirthday(date);
+        employeeDao.save(employee);
+
+        return "redirect:/employee/" + employee.getId();
     }
 }

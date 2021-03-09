@@ -14,19 +14,19 @@ pageEncoding="ISO-8859-1"%>
   <title>Employees</title>
 </head>
     <div class="container">
-    <br>
-    <h1>Site Root</h1>
-    <hr>
-
-    <a href="/admin"><h1>Admin Dashboard</h1></a>
-    <hr>
-
-    <a href="/users/create"><h1>Create User</h1></a>
-    <hr>
-
-    <a href="/employee/${user.emp.id}"><h1>View Profile</h1></a>
-    <hr>
-
-	<a href="/logout">Logout</a>
+    <h1>Edit employee</h1>
+        <hr>
+        <form action="/employee/${employee.id}/edit" method="POST">
+          <h3>Employee Details</h3>
+          Name: <input type="text" name="name"><br>
+          Emp Level: <select name="level">
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+            <option value="C3">C3</option>
+          </select><br>
+          Base Salary: <input type="text" name="baseSalary"><br>
+          <hr>
+          <input type="submit">
+        </form>
     </div>
 </html>

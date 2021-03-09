@@ -41,11 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //admin/* - admin - ROLE_ADMIN
         // /** - ROLE_USER, ROLE_ADMIN
         // premium/* - ROLE_ADMIN,ROLE_PREMIUM_USER
-        
+
         http.csrf().disable() //disable so that h2 works
         .authorizeRequests()
         .antMatchers("/h2-console/**", "/login", "/register").permitAll() // if u put this at bottom none of these pages will work since bottom line will take over
-        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/admin/**", "/employees/**/delete", "/users/create").hasRole("ADMIN")
         .antMatchers("/**").hasAnyRole("ADMIN", "USER")
         .and()
         .formLogin().permitAll()

@@ -14,19 +14,16 @@ pageEncoding="ISO-8859-1"%>
   <title>Employees</title>
 </head>
     <div class="container">
-    <br>
-    <h1>Site Root</h1>
-    <hr>
-
-    <a href="/admin"><h1>Admin Dashboard</h1></a>
-    <hr>
-
-    <a href="/users/create"><h1>Create User</h1></a>
-    <hr>
-
-    <a href="/employee/${user.emp.id}"><h1>View Profile</h1></a>
-    <hr>
-
-	<a href="/logout">Logout</a>
+    <h1>Edit address</h1>
+        <hr>
+        <form action="/address/${address.id}/edit" method="POST">
+          <h3>Employee Details</h3>
+          House no: <input type="text" name="houseNo"><br>
+          Street: <input type="text" name="street"><br>
+          City: <input type="text" name="city"><br>
+          ZipCode: <input type="text" name="zipCode"><br>
+          <hr>
+          <input type="submit">
+        </form>
     </div>
 </html>

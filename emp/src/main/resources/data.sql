@@ -14,7 +14,7 @@ insert into user (emp_id, username, password, active, email) values (2, 'user', 
 insert into user_roles (users_emp_id, roles_id) values (2, 2);
 
 -- user -- 
-insert into user (emp_id, username, password, active, email) values (3, 'user', '$2a$10$otMn8Xre2SYZm.cZwa4q8e7hq3Y7/gkGoD9FOMvVmRvPr75p3POLm', true, 'user2@ait.asia');
+insert into user (emp_id, username, password, active, email) values (3, 'user2', '$2a$10$otMn8Xre2SYZm.cZwa4q8e7hq3Y7/gkGoD9FOMvVmRvPr75p3POLm', true, 'user2@ait.asia');
 insert into user_roles (users_emp_id, roles_id) values (3, 2);
 
 -- addresses --

@@ -29,6 +29,7 @@ pageEncoding="ISO-8859-1"%>
                 <th>Email</th>
                 <th>Addresses</th>
                 <th>Deletion</th>
+                <th>Edit</th>
             </tr>
         </thead>
         
@@ -55,6 +56,11 @@ pageEncoding="ISO-8859-1"%>
                     <td>
                         <form action="/employee/${user.emp.id}/delete" method="GET">
                             <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/employee/${user.emp.id}/edit" method="GET">
+                            <input type="submit" value="Edit">
                         </form>
                     </td>
 

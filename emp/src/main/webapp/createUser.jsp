@@ -14,19 +14,24 @@ pageEncoding="ISO-8859-1"%>
   <title>Employees</title>
 </head>
     <div class="container">
-    <br>
-    <h1>Site Root</h1>
-    <hr>
+    <h1>Add User and employee</h1>
+        <hr>
+        <form action="/employees" method="POST">
+          Username: <input type="text" name="username"><br>
+          Email: <input type="text" name="email"><br>
+          Password: <input type="text" name="password"><br>
 
-    <a href="/admin"><h1>Admin Dashboard</h1></a>
-    <hr>
-
-    <a href="/users/create"><h1>Create User</h1></a>
-    <hr>
-
-    <a href="/employee/${user.emp.id}"><h1>View Profile</h1></a>
-    <hr>
-
-	<a href="/logout">Logout</a>
+          <h3>Employee Details</h3>
+          Name: <input type="text" name="name"><br>
+          Emp Level: <select name="level">
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+            <option value="C3">C3</option>
+          </select><br>
+          Birthday: <input type="date" name="birthday"><br>
+          Base Salary: <input type="text" name="baseSalary"><br>
+          <hr>
+          <input type="submit">
+        </form>
     </div>
 </html>
