@@ -70,10 +70,10 @@ public class Employee {
 	protected void onPostLoad() {
 		this.baseSalary_ =
 				Monetary.getDefaultAmountFactory()
-					.setNumber(baseSalary)
+					.setNumber(this.baseSalary)
 					.setCurrency("USD")
 					.create();
 
-        this.netSalary = empService.calculateNetSalary(level, baseSalary_);
+        // this.netSalary = empService.calculateNetSalary(this.getLevel(), this.baseSalary_);
 	}
 }

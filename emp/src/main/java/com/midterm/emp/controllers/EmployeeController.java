@@ -5,11 +5,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.money.MonetaryAmount;
+
 import com.midterm.emp.dao.EmployeeJPADao;
 import com.midterm.emp.dao.UserJPADao;
 import com.midterm.emp.models.Employee;
 import com.midterm.emp.models.User;
 import com.midterm.emp.services.AdminService;
+import com.midterm.emp.services.EmployeeService;
 import com.midterm.emp.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class EmployeeController {
+    @Autowired
+    EmployeeService empService;
+    
     @Autowired
     private EmployeeJPADao employeeDao;
 
@@ -51,6 +57,12 @@ public class EmployeeController {
 
         List<User> users = userDao.findAll();
         mv.addObject("users", users);
+
+        for (User u: users) {
+            Employee emp = u.getEmp();
+            MonetaryAmount netSalary = empService.calculateNetSalary(emp.getLevel(), emp.getBaseSalary_());
+            emp.setNetSalary(netSalary);
+        }
 
         // for (Role role: u.getRoles()) {
         //     if (role.getName().equalsIgnoreCase("ROLE_ADMIN")) {

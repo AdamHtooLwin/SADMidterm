@@ -1,9 +1,9 @@
 insert into role (name) values ('ROLE_ADMIN');
 insert into role (name) values ('ROLE_USER');
 
-insert into employee (name, level, birthday, base_salary) values ('Chaklam', 2, parsedatetime('17-09-1991', 'dd-MM-yyyy'), 40000);
-insert into employee (name, level, birthday, base_salary) values ('John', 1, parsedatetime('27-01-1981', 'dd-MM-yyyy'), 30000);
-insert into employee (name, level, birthday, base_salary) values ('Peter', 0, parsedatetime('11-09-1995', 'dd-MM-yyyy'), 25000);
+insert into employee (name, level, birthday, base_salary) values ('Chaklam', 2, parsedatetime('17-09-1991', 'dd-MM-yyyy'), 5000);
+insert into employee (name, level, birthday, base_salary) values ('John', 1, parsedatetime('27-01-1981', 'dd-MM-yyyy'), 3000);
+insert into employee (name, level, birthday, base_salary) values ('Peter', 0, parsedatetime('11-09-1995', 'dd-MM-yyyy'), 2500);
 
 -- admin user --
 insert into user (emp_id, username, password, active, email) values (1, 'admin', '$2a$10$otMn8Xre2SYZm.cZwa4q8e7hq3Y7/gkGoD9FOMvVmRvPr75p3POLm', true, 'admin@ait.asia');

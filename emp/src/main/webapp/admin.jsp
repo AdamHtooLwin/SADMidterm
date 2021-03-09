@@ -25,6 +25,7 @@ pageEncoding="ISO-8859-1"%>
                 <th>Level</th>
                 <th>Birthday</th>
                 <th>Base Salary</th>
+                <th>Net Salary</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Addresses</th>
@@ -40,7 +41,8 @@ pageEncoding="ISO-8859-1"%>
                     <td><c:out value="${user.emp.name}"/></td>
                     <td><c:out value="${user.emp.level}"/></td>
                     <td><c:out value="${user.emp.birthday}"/></td>
-                    <td><c:out value="${user.emp.baseSalary}"/></td>
+                    <td><c:out value="${user.emp.baseSalary_}"/></td>
+                    <td><c:out value="${user.emp.netSalary}"/></td>
                     <td><c:out value="${user.username}"/></td>
                     <td><c:out value="${user.email}"/></td>
                     <td>
