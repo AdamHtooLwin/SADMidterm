@@ -15,7 +15,7 @@ pageEncoding="ISO-8859-1"%>
 </head>
     <div class="container">
     <br>
-    <h1>Users</h1>
+    <h1>Employees</h1>
     <hr>
     <table class="table">
         <thead class="thead-dark">

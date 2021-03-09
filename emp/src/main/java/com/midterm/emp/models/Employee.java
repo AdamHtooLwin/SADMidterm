@@ -18,22 +18,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PostLoad;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.midterm.emp.services.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Setter
-@Getter
-@ToString
 @Entity
+@Builder
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
     @Transient
     @Autowired
@@ -43,6 +44,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+    @NotBlank(message = "This field is required")
 	private String name;
 
     @Enumerated

@@ -1,5 +1,6 @@
 package com.midterm.emp.controllers;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +11,7 @@ import javax.money.MonetaryAmount;
 import com.midterm.emp.dao.EmployeeJPADao;
 import com.midterm.emp.dao.UserJPADao;
 import com.midterm.emp.models.Employee;
+import com.midterm.emp.models.Level;
 import com.midterm.emp.models.User;
 import com.midterm.emp.services.AdminService;
 import com.midterm.emp.services.EmployeeService;
@@ -85,6 +87,28 @@ public class EmployeeController {
     @GetMapping(path = "/users/create")
     public String createUser() {
         return "/createUser.jsp";
+    }
+
+    @PostMapping(path = "/users")
+    public String createUser(User user,
+                                        @RequestParam(name = "name") String name, 
+                                        @RequestParam(name = "level") String level,
+                                        @RequestParam(name = "baseSalary") String baseSalary,
+                                        @RequestParam(name = "birthday") String birthday                          
+    ) {
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(birthday, formatter);
+
+        Employee employee = Employee.builder().name(name)
+                                    .level(Level.valueOf(level))
+                                    .baseSalary(new BigDecimal(baseSalary))
+                                    .birthday(date)
+                                .build();
+        user.setEmp(employee);
+        userService.save(user);
+
+        return "redirect:/admin";
     }
 
     @GetMapping(path = "employee/{id}/edit")
