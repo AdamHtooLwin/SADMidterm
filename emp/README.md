@@ -27,3 +27,9 @@
 2. `AdminService` - only used for updating employee by admin (similar to `AddressSerevice`)
 3. `EmployeeService` - handles the calculation of net salary according to employee level. Bonus value is obtained from `Level` enum method.
 4. `UserService` - handles saving of new users by the admin. On user persistence, employee persists also.
+
+## Mock Users
+
+1. **(Admin)** `username` - admin, `password` - password
+2. **(User)** `username` - user, `password` - password
+3. **(User)** `username` - user2, `password` - password
